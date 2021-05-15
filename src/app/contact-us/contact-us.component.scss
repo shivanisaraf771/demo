@@ -1,0 +1,80 @@
+form {
+  margin: 0% auto 0 auto;
+  padding: 30px;
+  width: 400px;
+  height: auto;
+  overflow: hidden;
+  background: rgba(224, 141, 141, 0.473);
+  border-radius: 10px;
+  color: white;
+}
+
+form label {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+form label,
+form input {
+  float: left;
+  clear: both;
+}
+
+form input {
+  margin: 15px 0;
+  padding: 15px 10px;
+  width: 100%;
+  outline: none;
+  border: 1px solid rgb(253, 253, 252);
+  border-radius: 20px;
+  display: inline-block;
+}
+
+form textarea {
+  clear: both;
+  width: 100%;
+  outline: none;
+  border: 1px solid rgb(22, 107, 146);
+  border-radius: 20px;
+  display: inline-block;
+}
+
+input[type="submit"] {
+  padding: 15px 50px;
+  width: auto;
+  background: rgb(94, 79, 75);
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  clear: right;
+}
+body {
+  background-color: #2ecc71;
+}
+
+.container {
+  width: 1000px;
+  height: 700px;
+  margin-top: 100px;
+}
+
+#loginForm {
+  width: 500px;
+  height: 400px;
+}
+body,
+html {
+  height: 100%;
+}
+
+.bg {
+  /* The image used */
+  background-image: url("https://i2.wp.com/files.123freevectors.com/wp-content/original/150942-grey-diagonal-shiny-lines-background-vector-art.jpg?w=420");
+  /* Full height */
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <div class="container">
+      <section id="content">
+        <button class="close" mat-button (click)="onNoClick()">X</button>
+        <form [formGroup]="loginForm" (ngSubmit)="Login()">
+          <h1>Login Form</h1>
+          <div>
+            <input
+              type="text"
+              class="from-control"
+              formControlName="email"
+              placeholder="email"
+              required=""
+              id="email"
+            />
+          </div>
+          <mat-error
+            style="font-size: small;"
+            class="mb-4"
+            *ngIf="loginForm.get('email').hasError('required')"
+          >
+            Eamil is Required!
+          </mat-error>
+          <mat-error
+            style="font-size: small;"
+            *ngIf="loginForm.get('email').hasError('pattern')"
+          >
+            Email is not correct!
+          </mat-error>
+          <br />
+          <div>
+            <input
+              type="text"
+              formControlName="password"
+              placeholder="password"
+              required=""
+              id="password"
+            />
+          </div>
+          <mat-error
+            style="font-size: small;"
+            class="mb-4"
+            *ngIf="loginForm.get('password').hasError('required')"
+          >
+            password is required!
+          </mat-error>
+          <mat-error
+            style="font-size: small;"
+            class="mb-4"
+            *ngIf="loginForm.get('password').hasError('minlength')"
+          >
+            password should be 6 digits!
+          </mat-error>
+          <div>
+            <input type="submit" value="Login" />
+            <div class="register">
+              <a href="#" routerLink="register">Register</a>
+            </div>
+          </div>
+        </form>
+        <!-- form -->
+      </section>
+      <!-- content -->
+    </div>
+    <!-- container -->
+  </body>
+</html>
