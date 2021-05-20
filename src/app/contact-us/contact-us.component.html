@@ -1,20 +1,66 @@
-<div class="bg">
-  <form action="https://formspree.io/techiediaries9@gmail.com" method="POST">
-    <h1 style="text-align: center;">Contact-Us</h1>
-    <div style="background-color: #d37c7c; height: 5px; width: 100%;"></div>
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" class="full-width" /><br />
-    <label for="email">Email Address</label>
-    <input type="email" id="email" name="_replyto" class="full-width" /><br />
-    <label for="message">Message</label>
-    <textarea
-      name="message"
-      id="message"
-      cols="20"
-      rows="10"
-      class="full-width"
-    ></textarea
-    ><br />
-    <input type="submit" value="Send" class="button" />
-  </form>
+<div class="image">
+  <div class="container">
+    <div class="row header">
+      <h1>CONTACT US &nbsp;</h1>
+      <h3>Fill out the form!</h3>
+    </div>
+    <div class="row body">
+      <form action="#">
+        <ul>
+          <li>
+            <p class="left">
+              <label for="first_name">first name</label>
+              <input
+                type="text"
+                name="first_name"
+                placeholder="First Name"
+                formControlName="first_name"
+              />
+            </p>
+            &nbsp;
+            <p class="pull-right">
+              <label for="last_name">last name</label>
+              <input
+                type="text"
+                name="last_name"
+                placeholder="Last Name"
+                formControlName="last_name"
+              />
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <label for="email">email <span class="req">*</span></label>
+              <input
+                type="email"
+                name="email"
+                placeholder="ABC@gmail.com"
+                formControlName="email"
+              />
+            </p>
+          </li>
+          <li><div class="divider"></div></li>
+          <li>
+            <label for="comments">comments</label>
+            <textarea
+              cols="46"
+              rows="3"
+              name="comments"
+              formControlName="comments"
+            ></textarea>
+          </li>
+
+          <li>
+            <input
+              class="btn btn-submit"
+              type="submit"
+              (click)="onSubmited()"
+              value="Submit"
+            />
+          </li>
+        </ul>
+      </form>
+    </div>
+  </div>
 </div>

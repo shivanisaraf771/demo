@@ -1,5 +1,9 @@
 import { Component, HostListener, OnInit } from "@angular/core";
+import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFirestore } from "@angular/fire/firestore";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-contact-us",
@@ -7,60 +11,49 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
   styleUrls: ["./contact-us.component.scss"],
 })
 export class ContactUsComponent implements OnInit {
-  contactForm: any;
-  disabledSubmitButton: boolean = true;
-  optionsSelect: any;
+  submitted = false;
+  ContactUs: any;
 
-  @HostListener("input") oninput() {
-    if (this.contactForm.valid) {
-      this.disabledSubmitButton = false;
-    }
-  }
-  constructor(fb: FormBuilder) {
-    this.contactForm = fb.group({
-      contactFormName: ["", Validators.required],
-      contactFormEmail: [
+  constructor(
+    private fb: FormBuilder,
+    private afStorage: AngularFirestore,
+    private toastr: ToastrService,
+    private auth: AngularFireAuth,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.ContactUs = this.fb.group({
+      first_name: ["", [Validators.required, Validators.pattern("^[A-Za-z]+")]],
+      last_name: ["", [Validators.required, Validators.pattern("^[A-Za-z]+")]],
+      email: [
         "",
-        Validators.compose([Validators.required, Validators.email]),
+        [
+          Validators.required,
+          Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$"),
+        ],
       ],
-      contactFormSubjects: ["", Validators.required],
-      contactFormMessage: ["", Validators.required],
-      contactFormCopy: ["", Validators.requiredTrue],
+      comments: ["", [Validators.required, Validators.pattern("^[A-Za-z]+")]],
     });
   }
 
-  ngOnInit() {
-    this.optionsSelect = [
-      { value: "Feedback", label: "Feedback" },
-      { value: "Report a bug", label: "Report a bug" },
-      { value: "Feature request", label: "Feature request" },
-      { value: "Other stuff", label: "Other stuff" },
-    ];
-  }
-
-  get name() {
-    return this.contactForm.get("contactFormName");
-  }
-  get email() {
-    return this.contactForm.get("contactFormEmail");
-  }
-  get subjects() {
-    return this.contactForm.get("contactFormSubjects");
-  }
-  get message() {
-    return this.contactForm.get("contactFormMessage");
-  }
-  get copy() {
-    return this.contactForm.get("contactFormCopy");
-  }
-
-  onSubmit() {
-    // this.connectionService.sendMessage(this.contactForm.value).subscribe(() => {
-    //   alert('Your message has been sent.');
-    //   this.contactForm.reset();
-    //   this.disabledSubmitButton = true;
-    // }, (error: any) => {
-    //   console.log('Error', error);
-    // });
+  onSubmited() {
+    if (this.ContactUs.valid) {
+      this.afStorage
+        .collection("Contact")
+        .add(this.ContactUs.value)
+        .then((res) => {
+          this.toastr.success(
+            "Saved Successfully",
+            "Record Saved Successfully....!",
+            { timeOut: 5000 }
+          );
+          this.ContactUs.reset();
+        });
+    } else {
+      this.toastr.error("Record not Save", "please check all the fields....!", {
+        timeOut: 5000,
+      });
+    }
   }
 }

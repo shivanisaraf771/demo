@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { AngularFirestore } from "@angular/fire/firestore";
 @Component({
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.scss"],
@@ -12,11 +13,13 @@ export class LoginComponent implements OnInit {
   Username = "";
   Password = "";
   loginForm: any;
+  result: any[] = [];
   constructor(
     private fb: FormBuilder,
     private auth: AngularFireAuth,
     private toastr: ToastrService,
     private route: Router,
+    private afStorage: AngularFirestore,
     private dialogRef: MatDialogRef<LoginComponent>
   ) {}
 
@@ -34,6 +37,7 @@ export class LoginComponent implements OnInit {
   }
 
   Login() {
+    let temp;
     this.auth
       .signInWithEmailAndPassword(
         this.loginForm.value["email"],
@@ -42,7 +46,27 @@ export class LoginComponent implements OnInit {
       .then(
         (res) => {
           localStorage.setItem("email", this.loginForm.value["email"]);
-          this.route.navigate(["/profile"]);
+          var prom = new Promise((resolve, rejects) => {
+            this.afStorage
+              .collection("registration", (ref) =>
+                ref.where("email", "==", localStorage.getItem("email"))
+              )
+              .valueChanges()
+              .subscribe((val) => {
+                console.log("VAL", val);
+                this.result.push(val);
+                console.log("res1", this.result);
+                resolve("res");
+              });
+          }).then(() => {
+            if (this.result[0][0]["Type"] == "job_seeker") {
+              this.route.navigate(["/profile"]);
+            } else {
+              this.route.navigate(["/job-provider"]);
+            }
+          });
+
+          this.dialogRef.close();
         },
         (errr) => {
           this.toastr.error(

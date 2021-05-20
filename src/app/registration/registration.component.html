@@ -64,28 +64,7 @@
         >
           Email is not correct!
         </mat-error>
-        <input
-          style="margin-left: 14%; width: 200% !important;"
-          type="text"
-          formControlName="UserName"
-          id="defaultRegisterFormUserName"
-          class="form-control mb-4"
-          placeholder="UserName"
-        />
-        <mat-error
-          style="font-size: small;"
-          class="mb-4"
-          *ngIf="registerForm.get('UserName').hasError('required')"
-        >
-          UserName is Required!
-        </mat-error>
-        <mat-error
-          style="font-size: small;"
-          class="mb-4"
-          *ngIf="registerForm.get('UserName').hasError('pattern')"
-        >
-          UserName is not correct!
-        </mat-error>
+
         <input
           style="margin-left: 14%; width: 200% !important;"
           type="password"
@@ -99,7 +78,8 @@
           class="mb-4"
           *ngIf="registerForm.get('password').hasError('required')"
         >
-          password is required!
+          password is required !<br />
+          At least 6 Digits!
         </mat-error>
         <input
           style="margin-left: 14%; width: 200% !important;"
@@ -332,6 +312,21 @@
             </mat-error>
           </mat-chip-list>
         </mat-form-field>
+
+        <select
+          class="browser-default custom-select"
+          placeholder="select"
+          formControlName="Type"
+        >
+          <option value="">Select Type</option>
+          <option value="job_seeker">Job Seeker</option>
+          <option value="job_provider">Job Provider</option>
+        </select>
+        <mat-error
+          style="font-size: small;"
+          *ngIf="registerForm.get('Type').hasError('required')"
+          >type is Required!</mat-error
+        >
       </div>
     </div>
   </div>

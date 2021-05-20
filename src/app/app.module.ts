@@ -5,6 +5,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { HomeComponent } from "./home/home.component";
+import { AvatarModule } from "ngx-avatar";
 import {
   ButtonsModule,
   CarouselModule,
@@ -46,13 +47,20 @@ import { ClientsComponent } from "./clients/clients.component";
 import { LoginComponent } from "./login/login.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatDividerModule } from "@angular/material/divider";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CommonModule } from "@angular/common";
 import { NavbarComponent } from "./navbar/navbar.component";
+import { RouterModule } from "@angular/router";
+import { BackButtonDisableModule } from "angular-disable-browser-back-button";
+import { ScrollingModule } from "@angular/cdk/scrolling";
+import { JobProviderComponent } from "./job-provider/job-provider.component";
+import { IvyCarouselModule } from "angular-responsive-carousel";
+import { SearchComponent } from './search/search.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     RegistrationComponent,
     AboutUSComponent,
     PageNotFoundComponent,
@@ -64,23 +72,31 @@ import { NavbarComponent } from "./navbar/navbar.component";
     ProfileComponent,
     HomeComponent,
     NavbarComponent,
+    JobProviderComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatNativeDateModule,
     NgbModule,
+    RouterModule,
     MatFormFieldModule,
     MatDialogModule,
+    IvyCarouselModule,
     ToastrModule,
+    MatDividerModule,
     MatCardModule,
     BrowserAnimationsModule,
+    ScrollingModule,
     MatButtonModule,
     AngularFirestoreModule,
     MatSelectModule,
     CarouselModule,
+    AvatarModule,
     WavesModule,
     FormsModule,
+    MatSidenavModule,
     ReactiveFormsModule,
     MatToolbarModule,
     MatGridListModule,
@@ -100,6 +116,9 @@ import { NavbarComponent } from "./navbar/navbar.component";
     MatSliderModule,
     MatDatepickerModule,
     CommonModule,
+    BackButtonDisableModule.forRoot({
+      preserveScrollPosition: true,
+    }),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     ToastrModule.forRoot({
       timeOut: 1000,

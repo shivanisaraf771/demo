@@ -4,6 +4,7 @@ import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { MatDialogRef } from "@angular/material/dialog";
 import { AngularFirestore } from "@angular/fire/firestore";
+import { AngularFireStorage } from "@angular/fire/storage";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Observable } from "rxjs";
 import { CdkDragDrop, DragDropModule } from "@angular/cdk/drag-drop";
@@ -39,12 +40,15 @@ export class RegistrationComponent implements OnInit {
   registerForm: any;
   submitted = false;
   myArray: any;
+  file: any;
+  private basePath = "/uploads";
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   hobbies: Hobbies[] = [];
   //item$: Observable<any[]>;
   constructor(
     private dialogRef: MatDialogRef<RegistrationComponent>,
     private afStorage: AngularFirestore,
+    private storage: AngularFireStorage,
     private fb: FormBuilder,
     private toastr: ToastrService,
     private auth: AngularFireAuth
@@ -70,7 +74,7 @@ export class RegistrationComponent implements OnInit {
             Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$"),
           ],
         ],
-        UserName: ["", Validators.required],
+        Type: ["", Validators.required],
         password: ["", Validators.required],
         Conform_password: ["", Validators.required],
 
@@ -150,6 +154,7 @@ export class RegistrationComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
       const file = event.target.files[0];
+      this.file = file;
       // this.registerForm.patchValue({
       //   profile: file,
       // });
@@ -160,7 +165,6 @@ export class RegistrationComponent implements OnInit {
         if (event.target) this.url = event.target.result;
       };
     }
-    this.registerForm.p.setValue(event.target.files[0]);
   }
   public delete() {
     this.url = null;
@@ -175,6 +179,8 @@ export class RegistrationComponent implements OnInit {
     );
     console.log(this.registerForm);
     if (this.registerForm.valid) {
+      var res = this.pushFileToStorage();
+      console.log(res);
       this.afStorage
         .collection("registration")
         .add(this.registerForm.value)
@@ -191,7 +197,10 @@ export class RegistrationComponent implements OnInit {
       });
     }
   }
-
+  pushFileToStorage() {
+    const filePath = `${this.basePath}/${this.registerForm.value["email"]}`;
+    const uploadTask = this.storage.upload(filePath, this.file);
+  }
   onClose() {
     this.dialogRef.close();
   }

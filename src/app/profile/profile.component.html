@@ -1,23 +1,64 @@
+<button
+  mdbBtn
+  color="info"
+  class="my-2 waves-effect z-depth-0 myButton"
+  mdbWavesEffect
+  (click)="logout()"
+  type="button"
+>
+  logout
+</button>
 <mat-card class="example-card">
   <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Shiba Inu</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    <a href="{{uploadTask | async}}" class="circle">
+      <img height="100" width="100" src="{{uploadTask | async}}" alt="" />
+    </a>
+    <mat-card-title>
+      <div *ngFor="let r of result | async">
+        {{r.first_name}} &nbsp;{{r.last_name}}
+      </div></mat-card-title
+    >
+
+    <mat-card-subtitle></mat-card-subtitle>
   </mat-card-header>
-  <img
-    mat-card-image
-    src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-    alt="Photo of a Shiba Inu"
-  />
   <mat-card-content>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz
-      breeds of dog from Japan. A small, agile dog that copes very well with
-      mountainous terrain, the Shiba Inu was originally bred for hunting.
-    </p>
+    <div *ngFor="let r of result | async">
+      Address : {{r.address}} <br />
+      Age : {{r.age}} <br />
+      Phone : {{r.phone_number}}
+    </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
+    <button mat-button color="primary">EDIT</button>
   </mat-card-actions>
 </mat-card>
+
+<br />
+<div>
+  <div class="container ml-5">
+    <div class="row">
+      <div class="col-md-3" *ngFor="let d of jobs ">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{d.Company_Name}}</h5>
+            <p class="card-text">
+              {{d.Role}}
+            </p>
+            <p class="card-text">
+              {{d.Skills}}
+            </p>
+            <button type="button" class="btn btn-outline-primary">
+              Apply
+            </button>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted"
+              >Posted Date : {{d.date * 1000 | date:'dd MM YYYY'}}</small
+            >
+          </div>
+        </div>
+        <div class="w-100"></div>
+      </div>
+    </div>
+  </div>
+</div>
