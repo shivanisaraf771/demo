@@ -1,0 +1,130 @@
+{
+  "registration": [
+    {
+      "first_name": "shivani",
+      "last_name": "saraf",
+      "email": "nitinabnaosss@gmail.com",
+      "Type": "job_seeker",
+      "password": "123456",
+      "Conform_password": "123456",
+      "phone_number": "1234567890",
+      "address": "vadgaon bk,pune",
+      "age": 11,
+      "state": "Haryana",
+      "country": "India",
+      "hobbie": "ddf",
+      "id": 1
+    },
+    {
+      "first_name": "nitin",
+      "last_name": "bansode",
+      "email": "nitin@gmail.com",
+      "Type": "job_provider",
+      "password": "123456",
+      "Conform_password": "123456",
+      "phone_number": "3423331122",
+      "address": "vadgaon bk,pune",
+      "age": 28,
+      "state": "Haryana",
+      "country": "India",
+      "hobbie": "rer",
+      "id": 2
+    },
+    {
+      "first_name": "nitin",
+      "last_name": "bansode",
+      "email": "shivani@gmail.com",
+      "Type": "job_provider",
+      "password": "567890",
+      "Conform_password": "567890",
+      "phone_number": "5464748876",
+      "address": "vadgaon bk,pune",
+      "age": 13,
+      "state": "Goa",
+      "country": "Afghanistan",
+      "hobbie": "retrtr",
+      "id": 3
+    }
+  ],
+  "jobs": [
+    {
+      "id": 1,
+      "Company_Name": "XYZ",
+      "Role": "SD",
+      "Skills": "Skills",
+      "date": "12/2/122"
+    },
+    {
+      "Company_Name": "AABCC",
+      "Role": "SD",
+      "Skills": "JAVA",
+      "date": "2021-05-26T18:30:00.000Z",
+      "id": 2
+    },
+    {
+      "Company_Name": "AABCC",
+      "Role": "SD",
+      "Skills": "JAVA",
+      "date": "2021-05-24T18:30:00.000Z",
+      "id": 3
+    },
+    {
+      "Company_Name": "sudhir",
+      "Role": "SD",
+      "Skills": "English, Vocabulary",
+      "date": "2021-05-26T18:30:00.000Z",
+      "id": 4
+    },
+    {
+      "Company_Name": "AABCC",
+      "Role": "SD",
+      "Skills": "JAVA",
+      "date": "2021-06-23T18:30:00.000Z",
+      "id": 5
+    }
+  ],
+  "contactUs": [
+    {
+      "id": 1,
+      "name": "BBBBB",
+      "email": "shivani@gmail.com",
+      "message": "affaaf"
+    },
+    {
+      "name": "dddfdg",
+      "email": "sarafshivani1997@gmail.com",
+      "message": "fdfdfds",
+      "id": 2
+    },
+    {
+      "name": "dddfdg",
+      "email": "sarafshivani1997@gmail.com",
+      "message": "errrrw",
+      "id": 3
+    },
+    {
+      "name": "dddfdg",
+      "email": "sarafshivani1997@gmail.com",
+      "message": "sdsd",
+      "id": 4
+    },
+    {
+      "name": "dddfdg",
+      "email": "sarafshivani1997@gmail.com",
+      "message": "as",
+      "id": 5
+    },
+    {
+      "name": "dddfdg",
+      "email": "sarafshivani1997@gmail.com",
+      "message": "a",
+      "id": 6
+    },
+    {
+      "name": "dddfdg",
+      "email": "sarafshivani1997@gmail.com",
+      "message": "wedx",
+      "id": 7
+    }
+  ]
+}

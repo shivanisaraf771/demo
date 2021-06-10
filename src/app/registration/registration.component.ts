@@ -1,3 +1,4 @@
+import { Registration } from "./../user";
 import { FormControl, NgForm, FormGroup } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
@@ -11,6 +12,9 @@ import { CdkDragDrop, DragDropModule } from "@angular/cdk/drag-drop";
 import { FormBuilder, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { ConfirmedValidator } from "../confirmed.validator";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { catchError } from "rxjs/operators";
+import { ServiceService } from "../services/service.service";
 export interface Hobbies {
   name: string;
 }
@@ -44,17 +48,22 @@ export class RegistrationComponent implements OnInit {
   private basePath = "/uploads";
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   hobbies: Hobbies[] = [];
-  //item$: Observable<any[]>;
+  mockUrl: string = "http://localhost:3000/users";
+  headerOption = {
+    headers: new HttpHeaders({ "Content-Type": "application/json" }),
+  };
+  item$: Observable<any[]>;
   constructor(
     private dialogRef: MatDialogRef<RegistrationComponent>,
     private afStorage: AngularFirestore,
     private storage: AngularFireStorage,
     private fb: FormBuilder,
+    private _service: ServiceService,
     private toastr: ToastrService,
-    private auth: AngularFireAuth
+    private auth: AngularFireAuth,
+    private httpClient: HttpClient
   ) {
-    //  this.item$ = afStorage.collection("registration").valueChanges();
-    //console.log(this.item$);
+    this.item$ = afStorage.collection("registration").valueChanges();
   }
   ngOnInit(): void {
     this.registerForm = this.fb.group(
@@ -97,29 +106,11 @@ export class RegistrationComponent implements OnInit {
       }
     );
   }
+
   get f() {
     return this.registerForm.controls;
   }
 
-  getDemo() {
-    // var docRef = this.afStorage.collection("registration").doc("reg");
-    // constructor(firestore: AngularFirestore) {
-    //   this.item$ = firestore.collection('items').valueChanges();
-    // console.log(docRef);
-    // .snapshotChanges()
-    // .stateChanges()
-    // or .auditTrail()
-    // this.afStorage
-    //   .collection("registration")
-    //   .get()
-    //   .subscribe((ss) => {
-    //     ss.docs.forEach((doc) => {
-    //       console.log("DOC", doc);
-    //     });
-    //   });
-    // console.log(this.myArray);
-    // return this.afStorage.collection("registration").doc("reg").valueChanges();
-  }
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
@@ -155,9 +146,9 @@ export class RegistrationComponent implements OnInit {
       var reader = new FileReader();
       const file = event.target.files[0];
       this.file = file;
-      // this.registerForm.patchValue({
-      //   profile: file,
-      // });
+      this.registerForm.patchValue({
+        profile: file,
+      });
       reader.readAsDataURL(event.target.files[0]); // read file as data url
 
       reader.onload = (event) => {
@@ -170,37 +161,31 @@ export class RegistrationComponent implements OnInit {
     this.url = null;
   }
 
-  async onSubmit() {
+  onSubmit() {
     this.submitted = true;
-
-    var result = await this.auth.createUserWithEmailAndPassword(
-      this.registerForm.value["email"],
-      this.registerForm.value["password"]
-    );
-    console.log(this.registerForm);
+    const newUser: Registration = Object.assign({}, this.registerForm.value);
+    this._service.save(newUser).subscribe((res: Registration) => {});
     if (this.registerForm.valid) {
-      var res = this.pushFileToStorage();
-      console.log(res);
-      this.afStorage
-        .collection("registration")
-        .add(this.registerForm.value)
-        .then((res) => {
-          this.toastr.success(
-            "Saved Successfully",
-            "Record Saved Successfully....!",
-            { timeOut: 5000 }
-          );
-        });
+      this.toastr.success(
+        "Saved Successfully",
+        "Record Saved Successfully....!",
+        {
+          timeOut: 5000,
+        }
+      );
+
+      //console.log(this.registerForm.value);
     } else {
       this.toastr.error("Record not Save", "please check all the fields....!", {
         timeOut: 5000,
       });
     }
   }
-  pushFileToStorage() {
-    const filePath = `${this.basePath}/${this.registerForm.value["email"]}`;
-    const uploadTask = this.storage.upload(filePath, this.file);
-  }
+
+  //pushFileToStorage() {
+  //const filePath = `${this.basePath}/${this.registerForm.value["email"]}`;
+  // const uploadTask = this.storage.upload(filePath, this.file);
+  //}
   onClose() {
     this.dialogRef.close();
   }

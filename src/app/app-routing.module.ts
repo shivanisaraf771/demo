@@ -10,9 +10,14 @@ import { JobsComponent } from "./jobs/jobs.component";
 import { LoginComponent } from "./login/login.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { ProfileComponent } from "./profile/profile.component";
+import { ViewAppliedJobComponent } from "./Provider/view-applied-job/view-applied-job.component";
 import { SearchComponent } from "./search/search.component";
 
 const routes: Routes = [
+  {
+    path: "applied-jobs",
+    component: ViewAppliedJobComponent,
+  },
   {
     path: "profile",
     component: ProfileComponent,

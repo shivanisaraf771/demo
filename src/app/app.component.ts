@@ -1,3 +1,5 @@
+import { ServiceService } from "./services/service.service";
+import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import {
   NavigationStart,
@@ -13,7 +15,7 @@ import {
 export class AppComponent {
   title = "demo";
   current_url: boolean = false;
-  constructor(private router: Router) {
+  constructor(private router: Router, private ServiceService: ServiceService) {
     this.router.events.subscribe((event: NavigationEvent) => {
       if (event instanceof NavigationStart) {
         if (

@@ -53,11 +53,16 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CommonModule } from "@angular/common";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { RouterModule } from "@angular/router";
+import { MatTableModule } from "@angular/material/table";
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatPaginatorModule } from "@angular/material/paginator";
 import { BackButtonDisableModule } from "angular-disable-browser-back-button";
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { JobProviderComponent } from "./job-provider/job-provider.component";
 import { IvyCarouselModule } from "angular-responsive-carousel";
-import { SearchComponent } from './search/search.component';
+import { SearchComponent } from "./search/search.component";
+import { ViewAppliedJobComponent } from "./Provider/view-applied-job/view-applied-job.component";
+import { HttpClientModule } from "@angular/common/http";
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,6 +79,7 @@ import { SearchComponent } from './search/search.component';
     NavbarComponent,
     JobProviderComponent,
     SearchComponent,
+    ViewAppliedJobComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,6 +93,10 @@ import { SearchComponent } from './search/search.component';
     ToastrModule,
     MatDividerModule,
     MatCardModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatTabsModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     ScrollingModule,
     MatButtonModule,

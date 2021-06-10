@@ -6,6 +6,8 @@ import { GridColumnStyleBuilder } from "@angular/flex-layout/grid/typings/column
 import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
+import { ServiceService } from "../services/service.service";
+import { Jobs } from "./../user";
 
 @Component({
   selector: "app-job-provider",
@@ -20,7 +22,8 @@ export class JobProviderComponent implements OnInit {
     private storage: AngularFireStorage,
     private toastr: ToastrService,
     private auth: AngularFireAuth,
-    private route: Router
+    private route: Router,
+    private _service: ServiceService
   ) {}
 
   ngOnInit(): void {
@@ -32,19 +35,10 @@ export class JobProviderComponent implements OnInit {
     });
   }
   send() {
-    debugger;
     if (this.jobprovider.valid) {
-      this.afStorage
-        .collection("Jobs")
-        .add(this.jobprovider.value)
-        .then((res) => {
-          this.toastr.success(
-            "Saved Successfully",
-            "Record Saved Successfully....!",
-            { timeOut: 5000 }
-          );
-          this.jobprovider.reset();
-        });
+      const newUser: Jobs = Object.assign({}, this.jobprovider.value);
+      this._service.saveJobs(newUser).subscribe((res: any) => {});
+      this.jobprovider.reset();
     } else {
       this.toastr.error("Record not Save", "please check all the fields....!", {
         timeOut: 5000,
@@ -55,5 +49,8 @@ export class JobProviderComponent implements OnInit {
   logout() {
     localStorage.clear();
     this.route.navigate(["/home"]);
+  }
+  appliedJobs() {
+    this.route.navigate(["/applied-jobs"]);
   }
 }
