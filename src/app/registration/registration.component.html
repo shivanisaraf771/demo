@@ -1,0 +1,371 @@
+<!-- Default form register -->
+
+<form
+  class="text-center border border-light"
+  [formGroup]="registerForm"
+  action="#!"
+>
+  <p class="h4 mb-4">Register</p>
+
+  <div class="form-row mb-4">
+    <div class="row">
+      <div class="col-xs-4">
+        <label class="hoverable" for="fileInput">
+          <img
+            [src]="url ? url : 'https://www.w3schools.com/howto/img_avatar.png'"
+          />
+          <div class="hover-text">Choose file</div>
+          <div class="background"></div>
+        </label>
+        <br />
+        <input id="fileInput" type="file" (change)="onSelectFile($event)" />
+        <button *ngIf="url" (click)="delete()">delete</button>
+      </div>
+      <div class="col-xs-4">
+        <input
+          type="text"
+          style="margin-left: 16% !important; width: 80% !important;"
+          id="defaultRegisterFormFirstName"
+          class="form-control mb-4"
+          maxlength="20"
+          formControlName="first_name"
+          placeholder="First name"
+        />
+        <mat-error
+          style="font-size: small;"
+          *ngIf="registerForm.get('first_name').hasError('required')"
+        >
+          First Name is Required!
+        </mat-error>
+        <mat-error
+          style="font-size: small;"
+          *ngIf="registerForm.get('first_name').hasError('pattern')"
+        >
+          First Name is not correct!
+        </mat-error>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input
+          style="margin-left: 14%; width: 200% !important;"
+          type="text"
+          formControlName="email"
+          id="defaultRegisterFormEmail"
+          class="form-control mb-4"
+          placeholder="E-mail"
+        />
+        <mat-error
+          style="font-size: small;"
+          class="mb-4"
+          *ngIf="registerForm.get('email').hasError('required')"
+        >
+          Eamil is Required!
+        </mat-error>
+        <mat-error
+          style="font-size: small;"
+          *ngIf="registerForm.get('email').hasError('pattern')"
+        >
+          Email is not correct!
+        </mat-error>
+
+        <input
+          style="margin-left: 14%; width: 200% !important;"
+          type="password"
+          formControlName="password"
+          id="defaultRegisterFormPassword"
+          class="form-control mb-4"
+          placeholder="password"
+        />
+        <mat-error
+          style="font-size: small;"
+          class="mb-4"
+          *ngIf="registerForm.get('password').hasError('required')"
+        >
+          password is required !<br />
+          At least 6 Digits!
+        </mat-error>
+        <input
+          style="margin-left: 14%; width: 200% !important;"
+          type="password"
+          formControlName="Conform_password"
+          id="defaultRegisterFormPasswors"
+          class="form-control mb-4"
+          placeholder="Conform_password"
+        />
+        <mat-error
+          style="font-size: small;"
+          class="mb-4 ml-4"
+          *ngIf="registerForm.get('Conform_password').hasError('required')"
+        >
+          confirm password is required!
+        </mat-error>
+        <mat-error
+          style="margin-top: -20px; margin-left: 4%; font-size: small;"
+          *ngIf="registerForm.get('Conform_password').hasError('confirmedValidator')"
+        >
+          Not match.
+        </mat-error>
+        <input
+          style="margin-left: 14%; width: 200% !important;"
+          type="phone number"
+          formControlName="phone_number"
+          id="defaultRegisterFormEmail"
+          class="form-control mb-4"
+          placeholder="Phone number"
+        />
+        <mat-error
+          style="font-size: small;"
+          class="ml-4"
+          *ngIf="registerForm.get('phone_number').hasError('required')"
+        >
+          phone number is Required!
+        </mat-error>
+        <mat-error
+          style="font-size: small;"
+          *ngIf="registerForm.get('phone_number').hasError('pattern')"
+        >
+          phone number is not correct!
+        </mat-error>
+      </div>
+      <div class="col-xs-4">
+        <input
+          type="text"
+          style="width: 115% !important;"
+          id="defaultRegisterFormLastName"
+          class="form-control mb-4"
+          formControlName="last_name"
+          placeholder="Last name"
+        />
+        <mat-error
+          style="font-size: small;"
+          *ngIf="registerForm.get('last_name').hasError('required')"
+        >
+          Last Name is Required!
+        </mat-error>
+        <mat-error
+          style="font-size: small;"
+          *ngIf="registerForm.get('last_name').hasError('pattern')"
+        >
+          Last Name is not correct!
+        </mat-error>
+      </div>
+      <div class="col-xs-4">
+        <div
+          class="example-label-container"
+          [class]="vertical ? 'example-label-vertical' : 'example-label-horizontal'"
+        >
+          <label id="example-name-label" class="example-name-label mr-3"
+            >Age</label
+          >
+          <label class="example-value-label">{{value}}</label>
+        </div>
+
+        <mat-slider
+          class="example-margin"
+          [disabled]="disabled"
+          [invert]="invert"
+          [max]="max"
+          [min]="min"
+          formControlName="age"
+          [step]="step"
+          [thumbLabel]="thumbLabel"
+          [tickInterval]="getSliderTickInterval()"
+          [(ngModel)]="value"
+          name="slider"
+          [vertical]="vertical"
+          aria-labelledby="example-name-label"
+        >
+        </mat-slider>
+      </div>
+
+      <div
+        class="col-xs-4"
+        style="margin-left: 25% !important; width: 65% !important;"
+      >
+        <small
+          id="defaultRegisterFormPhoneHelpBlock"
+          class="form-text text-muted mb-4"
+        >
+        </small>
+
+        <select
+          class="browser-default custom-select"
+          placeholder="country"
+          formControlName="country"
+        >
+          <option value="">Select your country</option>
+          <option value="India">India</option>
+          <option value="Afghanistan">Afghanistan</option>
+          <option value="Bangladesh">Bangladesh</option>
+          <option value="Canada">Canada</option>
+          <option value="China">China</option>
+          <option value="Dominica">Dominica</option>
+          <option value="Eritrea">Eritrea</option>
+          <option value="France">France</option>
+          <option value="Germany">Germany</option>
+          <option value="Grenada">Grenada</option>
+          <option value="Iraq">Iraq</option>
+          <option value="Italy">Italy</option>
+          <option value="Japan">Japan</option>
+          <option value="Nepal">Nepal</option>
+          <option value="Zambia">Zambia</option> </select
+        ><mat-error
+          style="font-size: small;"
+          *ngIf="registerForm.get('country').hasError('required')"
+        >
+          country is Required!
+        </mat-error>
+        <mat-error
+          style="font-size: small;"
+          *ngIf="registerForm.get('country').hasError('pattern')"
+        >
+          country is not correct! </mat-error
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <select class="browser-default custom-select" formControlName="state">
+          <option value="">Select your state</option>
+          <option value="Maharashtra">Maharashtra</option>
+          <option value="Meghalaya">Meghalaya</option>
+          <option value="Gujarat">Gujarat</option>
+          <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+          <option value="Assam">Assam</option>
+          <option value="Bihar">Bihar</option>
+          <option value="Chhattisgarh">Chhattisgarh </option>
+          <option value="Goa">Goa</option>
+          <option value="Haryana"> Haryana</option>
+          <option value="Haryana Pradesh"> Himachal Pradesh</option>
+          <option value="Jharkhand">Jharkhand</option>
+          <option value="Karnataka"> Karnataka</option>
+          <option value="Kerala">Kerala</option>
+          <option value="Madhya Pradesh"> Madhya Pradesh</option>
+          <option value="Manipur"> Manipur</option>
+          <option value="Mizoram">Mizoram</option>
+          <option value="Nagaland"> Nagaland</option>
+          <option value="Odisha"> Odisha</option>
+          <option value="Punjab">Punjab</option>
+          <option value="Rajasthan">Rajasthan</option>
+          <option value="Telangana"> Telangana</option>
+        </select>
+        <mat-error
+          style="font-size: small;"
+          *ngIf="registerForm.get('state').hasError('required')"
+        >
+          state is Required!
+        </mat-error>
+        <mat-error
+          style="font-size: small;"
+          *ngIf="registerForm.get('state').hasError('pattern')"
+        >
+          state is not correct!
+        </mat-error>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input
+          type="Address"
+          id="defaultRegisterFormAddress"
+          class="form-control mb-4"
+          formControlName="address"
+          placeholder="Address"
+        />
+        <mat-error
+          style="font-size: small;"
+          *ngIf="registerForm.get('address').hasError('required')"
+        >
+          Address is Required!
+        </mat-error>
+        <mat-error
+          style="font-size: small;"
+          *ngIf="registerForm.get('address').hasError('pattern')"
+        >
+          Address is not correct!
+        </mat-error>
+        <mat-form-field class="example-chip-list">
+          <mat-label>Hobbies</mat-label>
+          <mat-chip-list #chipList aria-label="Hobbies selection">
+            <mat-chip
+              *ngFor="let hobbie of hobbies"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="remove(hobbie)"
+            >
+              {{hobbie.name}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+
+            <input
+              placeholder="New hobbie..."
+              [matChipInputFor]="chipList"
+              formControlName="hobbie"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)"
+              placeholder="New Value"
+              type="text"
+              class="input-field col s12"
+            />
+            <mat-error
+              style="font-size: small;"
+              *ngIf="registerForm.get('hobbie').hasError('required')"
+            >
+              hobbie is Required!
+            </mat-error>
+            <mat-error
+              style="font-size: small;"
+              *ngIf="registerForm.get('hobbie').hasError('pattern')"
+            >
+              hobbie is not correct!
+            </mat-error>
+          </mat-chip-list>
+        </mat-form-field>
+
+        <select
+          class="browser-default custom-select"
+          placeholder="select"
+          formControlName="Type"
+        >
+          <option value="">Select Type</option>
+          <option value="job_seeker">Job Seeker</option>
+          <option value="job_provider">Job Provider</option>
+        </select>
+        <mat-error
+          style="font-size: small;"
+          *ngIf="registerForm.get('Type').hasError('required')"
+          >type is Required!</mat-error
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- Address -->
+
+  <button
+    mdbBtn
+    color="info"
+    class="my-2 waves-effect z-depth-0"
+    mdbWavesEffect
+    (click)="onClose()"
+    type="button"
+  >
+    Cancel
+  </button>
+  <button
+    class="btn btn-primary"
+    type="submit"
+    [disabled]="registerForm.invalid"
+    mdbBtn
+    color="info"
+    class="my-2 waves-effect z-depth-0"
+    mdbWavesEffect
+    (click)="onSubmit()"
+    type="submit"
+    type="button"
+  >
+    Submit
+  </button>
+  <script src="./scripts/firestore-db.js"></script>
+</form>
+
+<!-- Default form register -->
+<!-- <ul>
+  <li *ngFor="let item of item$ | async">
+    {{ item.first_name }} <br />
+    {{ item.last_name }} {{ item.email }} {{ item.phone }} {{ item.age }} {{
+    item.state }} {{ item.last_name }} {{ item.hobbies }}
+  </li>
+</ul> -->

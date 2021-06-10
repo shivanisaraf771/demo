@@ -1,0 +1,100 @@
+<mdb-carousel [animation]="'slide'">
+  <mdb-carousel-item>
+    <img
+      class="d-block w-100"
+      src="../assets/images/pexels-pixabay-39284.jpg"
+      alt="First slide"
+    />
+    <div class="carousel-caption d-none d-md-block">
+      <div class="input-group">
+        <input
+          type="search"
+          class="form-control rounded"
+          placeholder="Search"
+          aria-label="Search"
+          aria-describedby="search-addon"
+        />
+        <button
+          type="button"
+          class="btn btn-primary ml-2"
+          [routerLink]="['/search']"
+        >
+          search
+        </button>
+      </div>
+      <br /><br /><br />
+      <button type="button" class="btn btn-primary" (click)="openDialog()">
+        Register
+      </button>
+    </div>
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <img
+      class="d-block w-100"
+      style="overflow: hidden;"
+      src="../assets/images/pexels-lumn-399161.jpg"
+      alt="Second slide"
+    />
+    <div class="carousel-caption d-none d-md-block">
+      <div class="input-group">
+        <input
+          type="search"
+          class="form-control rounded"
+          placeholder="Search"
+          aria-label="Search"
+          aria-describedby="search-addon"
+        />
+        <button
+          type="button"
+          class="btn btn-primary ml-2"
+          [routerLink]="['/search']"
+        >
+          search
+        </button>
+      </div>
+      <br /><br /><br />
+      <button type="button" class="btn btn-primary" (click)="openDialog()">
+        Register
+      </button>
+    </div>
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <div class="view w-100">
+      <img
+        class="d-block w-100"
+        style="overflow: hidden;"
+        src="../assets/images/pexels-veeterzy-303383.jpg"
+        alt="First slide"
+      />
+      <div class="carousel-caption d-none d-md-block">
+        <div class="input-group">
+          <input
+            type="search"
+            class="form-control rounded"
+            placeholder="Search"
+            aria-label="Search"
+            aria-describedby="search-addon"
+          />
+          <button
+            type="button"
+            class="btn btn-primary ml-2"
+            [routerLink]="['/search']"
+          >
+            search
+          </button>
+        </div>
+
+        <br /><br />
+        <button type="button" class="btn btn-primary" (click)="openDialog()">
+          Register
+        </button>
+      </div>
+
+      <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+    </div>
+  </mdb-carousel-item>
+</mdb-carousel>
+<div style="text-align: center;">
+  <i style="font-size: medium;">We're leaders in </i> <br />
+  <h2>Creative Digital Recruitment</h2>
+</div>
